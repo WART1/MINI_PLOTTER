@@ -17,7 +17,6 @@ Serial mySerial;
 String arduinoPort = "COM9";
 String inString;
 boolean arduinoReady = false;
-boolean isStopping = false;
 
 int[] xP = new int[30000]; //x-position
 int[] yP = new int[30000]; //y-position
@@ -35,18 +34,15 @@ int     scale=8;
 int     lineIndex=0;
 boolean pMousePressed=false;
 boolean nMousePressed=false;
-boolean pKeyPressed=false;
 boolean invert=false;
 boolean mouseOnCanvas=false;
 String  fileName="---";
 int     grid=4;
-int     capSize=5;
+int     lineSize=5;
 PrintWriter output;
 boolean showGrid=true;
 boolean showPath=false;
-PImage  bgndImage;
-boolean showBgnd=false; 
-boolean lastMessageSuccess = true;
+
 
 // --- V2 
 // États possibles : 0 = ARRÊTÉ, 1 = EN COURS, 2 = PAUSE
@@ -73,7 +69,7 @@ PImage showGridIcon;
 PImage hideGridIcon;
 
 // process animation 
-int curentPointX, curentPointY = 0;
+// int curentPointX, curentPointY = 0;
 int lastPointX, lastPointY = 0;
 PGraphics processLayer;
 String overLabel = "";
@@ -82,12 +78,10 @@ boolean savingProcesing = false;
 
 void setup() {
   size(1500, 840);
-  processLayer = createGraphics(width, height);
   loadIcons();
   print("port dispo : ");
-  printArray(Serial.list());
-  mySerial = new Serial(this, arduinoPort, 38400);
-  //mySerial.bufferUntil('\n'); // before calling serialEvent()
+  //printArray(Serial.list());
+  //mySerial = new Serial(this, arduinoPort, 38400);
   smooth(0);
   xP[0]=1;
   yP[0]=1;
@@ -137,7 +131,6 @@ void draw() {
     displayLabel(overLabel);
   }
   
-  // pKeyPressed   = keyPressed;
   pMousePressed = nMousePressed;
   
   processPrinting();

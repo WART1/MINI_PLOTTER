@@ -51,9 +51,7 @@ void startPrintingSequence() {
   printStatus = 1;
   println("Impression lancée !");
 }
-void sendDrawing() {
-  pressPlay();
-}
+
 void saveToPrintBuffer() {
   if (lineIndex < 0) return;
 

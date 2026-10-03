@@ -29,17 +29,9 @@ void lineTo(int command, float newX, float newY, float servo) {
   newY=constrain(newY, 1, 255);
   servo=constrain(servo, 1, 255);
 
-  if (invert) {
-    stroke(lineColor, int(servo)*.75);
-  } else {
-    stroke(lineColor, int(servo)*.75);
-  }
-  strokeWeight(capSize);
-
-  if (servo==1 && showPath) {
-    strokeWeight(1);
-    stroke(255, 0, 0);
-  }
+ 
+  stroke(lineColor, int(servo)*.75);
+  strokeWeight(lineSize);
 
   line(oldX*scale+xOff, oldY*scale+yOff, newX*scale+xOff, newY*scale+yOff);
   
@@ -49,29 +41,13 @@ void lineTo(int command, float newX, float newY, float servo) {
 
 // --- DRAW CANVAS AND GRID ---
 void drawCanvas() {
-  int alpha=255;
-  if (showBgnd) {
-    alpha=0;
-  }
-  if (invert) {
-    fill(0, alpha);
-  } else {
-    fill(255, alpha);
-  }
-
   noStroke();
   
   rect(xOff, yOff, 100*scale, 100*scale); // la partie blanche
   fill(0,0,250);
   circle((xOff+(50*scale)), (yOff+(50*scale)), 10); // dessiner le point au centre
-  fill(64);
-  rect(xOff+260*scale, yOff, 800, 200*scale); // la partie bouton
 
-  if (invert) {
-    stroke(48);
-  } else {
-    stroke(200);
-  }
+  stroke(255,0,0);
   if (showGrid) {
     strokeWeight(1);
     for (int i=0; i<=xMax; i+=grid) {
@@ -103,16 +79,5 @@ void undo() {
 
 // --- DISPLAY PROCESS ---
 void processStatus(){
-  
-  int x = printXP[currentPrintingIndex];
-  int y = printYP[currentPrintingIndex];
-  processLayer.fill(0,255,0);
-  processLayer.circle(x+5, y+5, 10);
-  // lastPointX = x;
-  // lastPointY = y;
-
-  // recuperer la position actuellle 
-  // display le point actuel et le precedent s'il existe et celui encore avant s'il existe
-  // tracer une ligne entre les deux
-
+  // pouvoir suivre la progression de l'impression
 }

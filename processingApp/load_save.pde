@@ -8,7 +8,6 @@ void loadSelected(File selection) {
   } else {
     println("User selected " + selection.getAbsolutePath());
     BufferedReader reader = createReader(selection.getAbsolutePath());
-    fileName=selection.getName();
     String line = null;
     try {
       while ((line = reader.readLine()) != null) {
@@ -44,7 +43,6 @@ void saveSelected(File selection) {
     if (!path.toLowerCase().endsWith(".PLT")) {
       path += ".PLT";
     }
-    fileName=selection.getName();
     println("exporting: "+path);
     output = createWriter(path); // creer un new fichier dans le path
     output.println("003,001,001,001"); // calibrate // ecrit en premier les commandes de calibration

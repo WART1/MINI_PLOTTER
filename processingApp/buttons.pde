@@ -1,32 +1,6 @@
 // --- MENU BUTTONS ---
 // check if button is pressed or not and return pressed
 // handle the over on btn
-// --- TEXT BUTTON
-boolean button(int buttonX, int buttonY, int buttonW, int buttonH, String buttonLabel) {
-  boolean pressed=false;
-
-  boolean over=(mouseX>=buttonX && mouseY>=buttonY && mouseX<= buttonX+buttonW && mouseY<=buttonY+buttonH);
-
-  if (over) {
-    fill(128);
-    if (nMousePressed && pMousePressed==false) {
-      pressed=true;
-      fill(160);
-    }
-  } else {
-    fill(96);
-  }
-
-  noStroke();
-  rect(buttonX, buttonY, buttonW, buttonH);
-  
-  fill(255); // 255
-  textSize(18);
-  textAlign(CENTER);
-  text(buttonLabel, buttonX+buttonW/2, buttonY+buttonH*.7);
-
-  return pressed;
-}
 // --- IMG BUTTON
 boolean button(int buttonX, int buttonY, int buttonW, int buttonH, PImage icon, String label) {
   int padding = 10; 
@@ -64,7 +38,6 @@ void displayLabel(String label) {
   // Petit rectangle de fond pour la lisibilité
   fill(0, 150); // Noir transparent
   noStroke();
-  // rectMode(CENTER);
   float txtWidth = textWidth(label) + 20;
   rect(mouseX+50, mouseY, txtWidth, 40, 5); // Positionner près de ta zone de légende
   
@@ -75,7 +48,6 @@ void displayLabel(String label) {
   text(label, mouseX+70, mouseY+25); 
   
   popMatrix(); // Restaure l'état
-  rectMode(CORNER); // Remet le mode par défaut
 }
 void displayButtons(int menuY) {
    if (button(900, menuY, 80, 80, loadIcon, "Charger un dessin")) {
@@ -100,7 +72,7 @@ void displayButtons(int menuY) {
   }
   if(button(900, menuY+=120, 100, 100, printIcon, "Lance l'impression")) {
     if(lineIndex > 0){
-      sendDrawing();
+      pressPlay();
     } 
   }
   if(printStatus !=0){
