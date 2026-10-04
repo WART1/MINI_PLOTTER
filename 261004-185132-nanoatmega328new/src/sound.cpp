@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------- play a short random melody with led ecffect
 #include <Arduino.h>
+#include "../include/projet.h"
 void triTone() {
   int freq = random(200, 1000);
 

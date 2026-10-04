@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------- switch the stepper coils
 
 #include <Arduino.h>
+#include "../include/projet.h"
 const uint8_t stepperPins[2][4] = {
   // stepper coil pins
   { in1_A_X, in2_B_X, in3_C_X, in4_D_X },  // stepper 1 X

@@ -3,6 +3,7 @@ This function use ACK (acknowledge) - NACK (not acknowledge) protocol to communi
 This protocol send a byte(6) if the checksum received is the same as the one locally calculated, or a byte(21) if there is an error
 */
 #include <Arduino.h>
+#include "../include/projet.h"
 byte receive[6];
 byte receiveIndex = 0;
 boolean newMessageFlag = 0;

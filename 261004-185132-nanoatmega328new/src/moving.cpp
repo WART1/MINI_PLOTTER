@@ -1,5 +1,6 @@
 // ------------- DEBUG algorithme de Breseham
 #include <Arduino.h>
+#include "../include/projet.h"
 void move(int command, int xTargetMM, int yTargetMM, int penIn) {
   long targetStepsX = (long)(xTargetMM * stepsPerMM);
   long targetStepsY = (long)(yTargetMM * stepsPerMM);

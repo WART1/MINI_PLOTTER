@@ -1,3 +1,5 @@
+#pragma once
+
 #define in1_A_X 2
 #define in2_B_X 3 
 #define in3_C_X 4 

@@ -17,9 +17,9 @@ Protocol:
   BYTE 5: CHKSM   (B0+B1+B2+B3+B4)%250+1 
   
 */
-#include <Arduino.h>
+#include <Arduino.h> // pour que platformio comprenne les fonctions Arduino
 #include <Servo.h>
-#include "constants.h"
+#include "../include/projet.h" 
 Servo myservo;           //                                                   servo to lift / lower the pen
 
 
@@ -53,39 +53,30 @@ void setup() {
   pinMode(in2_B_Y,     OUTPUT);
   pinMode(in3_C_Y,     OUTPUT);
   pinMode(in4_D_Y,     OUTPUT);
+
   pinMode(X_ENDSWITCH, INPUT_PULLUP);
   pinMode(Y_ENDSWITCH, INPUT_PULLUP);
+
   pinMode(PIEZO,       OUTPUT);
   pinMode(SERVO,       OUTPUT);
   pinMode(ledPin,      OUTPUT);
+  
   Serial.begin(38400);
   //triTone();
   tone(PIEZO, 2000, 100);
   delay(200);
   establishContact();  // send a byte to establish contact until receiver responds
   homing();
-  //sendRawCoord();
 }
 
 
 void loop() {
   if (receivedMessage()) {
-    // ICI : Ton code pour faire bouger les moteurs
-    // Exemple : movePlotter(xPosIn, yPosIn, penIn);
-
     digitalWrite(ledPin, HIGH);
     delay(10);  // Petit flash LED pour confirmer la réception
     digitalWrite(ledPin, LOW);
   }
-  // penUp();
-  // delay(3000);
-  // penDown();
-  // delay(3000);
 }
-
-
-
-
 
 void blink() {
   digitalWrite(ledPin, HIGH);
