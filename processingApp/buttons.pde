@@ -1,7 +1,6 @@
-// --- MENU BUTTONS ---
-// check if button is pressed or not and return pressed
-// handle the over on btn
-// --- IMG BUTTON
+/*
+La focntion 'button' dessine un bouton rond avec une icône et un label. Elle retourne true si le bouton est pressé, sinon false.
+*/
 boolean button(int buttonX, int buttonY, int buttonW, int buttonH, PImage icon, String label) {
   int padding = 10; 
   boolean pressed=false;
