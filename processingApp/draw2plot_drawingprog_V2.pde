@@ -89,9 +89,9 @@ void setup() {
   size(1350, 840);
   loadIcons();
   print("port dispo : ");
-  // printArray(Serial.list());
-  // arduinoPort = Serial.list()[0];
-  //mySerial = new Serial(this, arduinoPort, 38400);
+  printArray(Serial.list());
+  arduinoPort = Serial.list()[0];
+  mySerial = new Serial(this, arduinoPort, 38400);
   smooth(0);
   xP[0]=1;
   yP[0]=1;

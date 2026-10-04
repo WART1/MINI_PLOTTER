@@ -88,16 +88,18 @@ void displayButtons(int menuY, int menuX, int buttonSize) {
       pressPlay();
     } 
   }
-  if(printStatus !=0){
+  if(printStatus != 0){
     if(button(menuX, menuY+=120, buttonSize, buttonSize, stopIcon, "Arrêter l'impression")) {
       pressStop();
     }
-    if(button(menuX, menuY, buttonSize, buttonSize, pauseIcon, "Pause l'impression")){
-      pressPause();
+    if(printStatus != 2){
+      if(button(menuX+150, menuY, buttonSize, buttonSize, pauseIcon, "Pause l'impression")){
+        pressPause();
+      }
     }
   }
   if(printStatus == 2){
-    if(button(menuX, menuY, buttonSize, buttonSize, playIcon, "Reprendre l'impression")){
+    if(button(menuX+250, menuY, buttonSize, buttonSize, playIcon, "Reprendre l'impression")){
       pressPlay();
     }
   }
