@@ -10,20 +10,15 @@
 
 
 
-// COMMUNICATION
+// --- COMMUNICATION ---
 import processing.serial.*;
 Serial mySerial;
-//String arduinoPort = "/dev/ttyUSB0";
-String arduinoPort = "COM9";
+//String arduinoPort = "/dev/ttyUSB0"; // pour linux
+String arduinoPort = "COM9"; // pour windows
 String inString;
 boolean arduinoReady = false;
 
-int[] xP = new int[30000]; //x-position
-int[] yP = new int[30000]; //y-position
-int[] sP = new int[30000]; //servo
-int[] cP = new int[30000]; //command
-
-int     lineColor  = #2706fe;
+// --- CANVAS ---
 int     xMax=100; // canvas size in mm
 int     yMax=100;
 int     xOff=10;  // origin of canvas on the screen
@@ -31,17 +26,43 @@ int     yOff=10;
 float   oldX=0; // coordinates of printhead after drawing line
 float   oldY=0;
 int     scale=8;
+
+// --- DRAWING ---
 int     lineIndex=0;
 boolean pMousePressed=false;
 boolean nMousePressed=false;
-boolean invert=false;
 boolean mouseOnCanvas=false;
-String  fileName="---";
 int     grid=4;
 int     lineSize=5;
-PrintWriter output;
+int     lineColor  = #2706fe;
 boolean showGrid=true;
 boolean showPath=false;
+
+
+
+// --- INTERFACE ---
+// ICON BTN
+PImage playIcon;
+PImage stopIcon; 
+PImage pauseIcon;
+PImage printIcon;
+PImage trashIcon;  
+PImage undoIcon;
+PImage loadIcon;
+PImage plusIcon;
+PImage moinsIcon;
+PImage showGridIcon;
+PImage hideGridIcon;
+// LOAD/SAVE
+String  fileName="---";
+PrintWriter output; // Pour ecrire des données dans un fichier
+
+// --- POSITIONS ---
+int[] xP = new int[30000]; //x-position
+int[] yP = new int[30000]; //y-position
+int[] sP = new int[30000]; //servo
+int[] cP = new int[30000]; //command
+
 
 
 // --- V2 
@@ -55,18 +76,6 @@ int[] printXP = new int[5000];
 int[] printYP = new int[5000];
 int[] printSP = new int[5000];
 int printLineIndex = 0; // Le nombre de lignes à imprimer pour cette session
-// --- ICON BTN
-PImage playIcon;
-PImage stopIcon; 
-PImage pauseIcon;
-PImage printIcon;
-PImage trashIcon;  
-PImage undoIcon;
-PImage loadIcon;
-PImage plusIcon;
-PImage moinsIcon;
-PImage showGridIcon;
-PImage hideGridIcon;
 
 // process animation 
 // int curentPointX, curentPointY = 0;
@@ -77,12 +86,12 @@ boolean isSaved = false;
 boolean savingProcesing = false;
 
 void setup() {
-  size(1500, 840);
+  size(1350, 840);
   loadIcons();
   print("port dispo : ");
-  printArray(Serial.list());
-  arduinoPort = Serial.list()[0];
-  mySerial = new Serial(this, arduinoPort, 38400);
+  // printArray(Serial.list());
+  // arduinoPort = Serial.list()[0];
+  //mySerial = new Serial(this, arduinoPort, 38400);
   smooth(0);
   xP[0]=1;
   yP[0]=1;
@@ -95,7 +104,7 @@ void setup() {
 void draw() {
   overLabel = "";
   nMousePressed=mousePressed;
-  background(155, 93, 229);
+  background(64,64,64);
   
 
   drawCanvas();

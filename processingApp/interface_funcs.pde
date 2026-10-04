@@ -14,10 +14,9 @@ void drawCursor() { // contraint les valeur de mouseX et mouseY dans les valeur 
   mX=constrain(int(mXGrid), 1, xMax);
   mY=constrain(int(mYGrid), 1, yMax);
   
-  
   // couleur du curseur
   strokeWeight(2);
-  stroke(0, 255, 25);
+  stroke(39,6,254);
   // draw the cursor
   line((mX+5)*scale+xOff, (mY+5)*scale+yOff, (mX-5)*scale+xOff, (mY-5)*scale+yOff);
   line((mX-5)*scale+xOff, (mY+5)*scale+yOff, (mX+5)*scale+xOff, (mY-5)*scale+yOff);
@@ -28,7 +27,6 @@ void lineTo(int command, float newX, float newY, float servo) {
   newX=constrain(newX, 1, 255);
   newY=constrain(newY, 1, 255);
   servo=constrain(servo, 1, 255);
-
  
   stroke(lineColor, int(servo)*.75);
   strokeWeight(lineSize);
