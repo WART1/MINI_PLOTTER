@@ -22,7 +22,7 @@ void processPrinting() {
   // GESTION DU RETOUR AU HOME (État 3)
   if (printStatus == 3 && !waitingForAck) {
     println(".. back to home ..");
-    sendSingleMessage(byte(3), byte(1), byte(1), byte(1));
+    sendSingleMessage(byte(3), byte(1), byte(1), byte(1)); //x1, y1, pen up
     waitingForAck = true;
     printStatus = 4; // État d'attente du dernier ACK de l'Arduino
   }

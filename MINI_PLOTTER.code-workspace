@@ -7,5 +7,7 @@
 			"path": "processingApp"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": { "*.ino": "cpp" }
+}
 }

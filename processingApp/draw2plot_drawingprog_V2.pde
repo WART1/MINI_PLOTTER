@@ -3,11 +3,17 @@
 // MERCI Niklas ;-)
 // *******************************************************************************************************
 // **  V2 - 11/05/26
-// **  - refactorisation du code de communication pour le rendre non bloquant
 // *******************************************************************************************************
-// *******************************************************************************************************
-// -> print stauts :: 0 = ARRÊTÉ, 1 = EN COURS, 2 = PAUSE
-
+/*
+Protocol:
+  > print status :: 0 = ARRÊTÉ, 1 = EN COURS, 2 = PAUSE
+  BYTE 0: Start   (0)      /  start signal
+  BYTE 1: Command (1-255) // not used
+  BYTE 2: X-POS   (1-100)  //-> X-POS va de 1 à 100 mm
+  BYTE 3: Y-POS   (1-100) //-> Y-pos va de 1 à 100 mm
+  BYTE 4: PEN   (1-255)  UP - DOWN
+  BYTE 5: CHKSM   (B0+B1+B2+B3+B4)%250+1 
+*/
 
 
 // --- COMMUNICATION ---
@@ -37,8 +43,6 @@ int     lineSize=5;
 int     lineColor  = #2706fe;
 boolean showGrid=true;
 boolean showPath=false;
-
-
 
 // --- INTERFACE ---
 // ICON BTN
@@ -120,7 +124,7 @@ void draw() {
       cP[lineIndex]=1;
       sP[lineIndex]=1;
       if (lineIndex>1) {
-        sP[lineIndex]=255; //pour activer le spray
+        sP[lineIndex]=255; //pour baisser le stylo
       }
     }
 
@@ -128,8 +132,8 @@ void draw() {
       lineIndex++;
       xP[lineIndex]=mX;
       yP[lineIndex]=mY;
-      cP[lineIndex]=2; // move to target position with maximum speed without spraying
-      sP[lineIndex]=1; // remet à 1 pour desactiver le spray le long du trajet 
+      cP[lineIndex]=2; // pas utilisé pour l'instant
+      sP[lineIndex]=1; // remet à 1 pour relever le stylo le long du trajet 
     }
   }
 

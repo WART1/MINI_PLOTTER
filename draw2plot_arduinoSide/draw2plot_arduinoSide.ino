@@ -10,17 +10,11 @@
 Protocol:
 
   BYTE 0: Start   (0)      /  start signal
-  BYTE 1: Command (1-255)
-  BYTE 2: X-POS   (1-100)  /  X-SPEED (10...60...110) //-> X-POS va de 1 à 100 mm
-  BYTE 3: Y-POS   (1-100)  /  Y-SPEED (10...60...110) //-> Y-pos va de 1 à 100 mm
-  BYTE 4: PEN   (1-255)  
+  BYTE 1: Command (1-255) // not used
+  BYTE 2: X-POS   (1-100)  //-> X-POS va de 1 à 100 mm
+  BYTE 3: Y-POS   (1-100) //-> Y-pos va de 1 à 100 mm
+  BYTE 4: PEN   (1-255)  UP - DOWN
   BYTE 5: CHKSM   (B0+B1+B2+B3+B4)%250+1 
-
-  Commands:
-
-  1: move to coordinates with penDown
-  2: move with max speed to coordinates with penUP, once arrived penDown (?)
-  3: calibrate
   
 */
 #include <Servo.h>

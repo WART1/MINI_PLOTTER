@@ -15,13 +15,7 @@ boolean receivedMessage() {
 
   while (Serial.available() > 0) {
     int inByte = Serial.read();
-    // if (handshake == false) {
-    //   if (inByte == 65) {  // processing handshake byte
-    //     handshake = true;
-    //     Serial.println("OK"); // GEMINI // on a retiré la partie "recu"
-    //     return false; // receivedMessage = false
-    //   }
-    // } else {              // si le handshake a ete fait // on receptionne le mesg positions
+
     if (inByte == 0) {  // header // ca commence
       receiveIndex = 0;
       receive[0] = 0;
@@ -43,7 +37,7 @@ boolean receivedMessage() {
             chksmOK = true;
           }
           if (chksmOK) {              // si checksum valide > new mesg has arrived
-            if (command == 4) {       // COMMANDE STOP
+            if (command == 4) {       // COMMANDE STOP not used yet
               stopSteppers();         // Coupe le courant des moteurs immédiatement
               homing();               // Retour à l'origine
               Serial.write(byte(6));  // ACK pour dire que le Stop + Homing est fini
