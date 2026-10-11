@@ -57,7 +57,7 @@ void saveSelected(File selection) {
     output.flush();  
     output.close();
     isSaved = true; 
-    startPrintingSequence(); // On lance l'impression juste après la sauvegarde
+    //startPrintingSequence(); // On lance l'impression juste après la sauvegarde
   }
   
 }

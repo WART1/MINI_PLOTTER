@@ -89,7 +89,7 @@ void displayButtons(int menuY, int menuX, int buttonSize) {
       pressPlay();
     }
     } 
-    if(button(menuX + 150 , menuY+=120, buttonSize, buttonSize, saveIcon, "Save to file")) {
+    if(button(menuX + 100 , menuY, buttonSize, buttonSize, saveIcon, "Save to file")) {
     if(lineIndex > 0){
       exportFile();
     } 
