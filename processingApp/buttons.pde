@@ -128,6 +128,10 @@ void displayLegends(int menuY, int menuX) {
   //text("CAP SIZE: "+capSize, 1160, menuY+=30);
   text("X: "+mX+" cm", menuX, menuY+=30);
   text("Y: "+mY+" cm", menuX, menuY+=30);
+  if (fileSaved != ""){
+    text("Fichier actuel : " + fileSaved, menuX-=200, 790);
+  }
+  
 }
 // Affichage du menu complet (boutons + légendes)
 void renderMenu() {

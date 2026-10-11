@@ -1,3 +1,4 @@
+String fileSaved = "";
 // --- LOAD DRAWING ---
 void loadFile() {
   selectInput("Select a file to process:", "loadSelected", dataFile( "*.PLT"));
@@ -7,6 +8,7 @@ void loadSelected(File selection) {
     println("window closed");
   } else {
     println("User selected " + selection.getAbsolutePath());
+    fileSaved = selection.getName();
     BufferedReader reader = createReader(selection.getAbsolutePath());
     String line = null;
     try {
@@ -20,6 +22,7 @@ void loadSelected(File selection) {
           lineIndex++;
         }
       }
+      isSaved = true; // eviter de resauvegarder lors de l'impression 
       reader.close();
     } 
     catch (IOException e) {
@@ -31,16 +34,18 @@ void loadSelected(File selection) {
 
 // --- SAVE DRAWING ---
 void exportFile() {
-  selectOutput("Save file as:", "saveSelected", dataFile( ".PLT")); // selectOutput(prompt, callback, file)
+  selectOutput("Save file as:", "saveSelected", dataFile( "dessin.PLT")); // selectOutput(prompt, callback, file)
 }
 void saveSelected(File selection) {
+  fileSaved = "";
   savingProcesing = true;
   if (selection == null) {
     println("window closed");
   } else {
     String path = selection.getAbsolutePath();
+    fileSaved = selection.getName();
     // Sécurité : Ajoute l'extension si l'utilisateur l'a oubliée
-    if (!path.toLowerCase().endsWith(".PLT")) {
+    if (!path.toLowerCase().endsWith(".plt")) {
       path += ".PLT";
     }
     println("exporting: "+path);

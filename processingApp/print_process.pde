@@ -83,7 +83,7 @@ void sendSingleMessage(byte command, byte xPos, byte yPos, byte pen) {
 // --- PRINTING BUTTONS
 void pressPlay() {
   // On ne lance la sauvegarde que si on n'est pas déjà en train d'imprimer
-  if (printStatus == 0) { // bouton impression
+  if (printStatus == 0) { 
     if (lineIndex < 0) {
       println("Rien à imprimer !");
       return;

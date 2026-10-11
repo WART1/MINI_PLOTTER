@@ -92,16 +92,18 @@ boolean savingProcesing = false;
 void setup() {
   size(1350, 840);
   loadIcons();
+  // --- COMMUNICATION ---
   print("port dispo : ");
-  printArray(Serial.list());
-  arduinoPort = Serial.list()[0];
-  mySerial = new Serial(this, arduinoPort, 38400);
-  smooth(0);
+  // printArray(Serial.list());
+  // arduinoPort = Serial.list()[0];
+  // mySerial = new Serial(this, arduinoPort, 38400);
+  arduinoReady = false;
+  // ---
+  smooth(0); // ?
   xP[0]=1;
   yP[0]=1;
   cP[0]=2;
   sP[0]=1;
-  arduinoReady = false;
   //mySerial.clear();     // Vide les "ready" envoyés pendant le boot
 }
 
@@ -146,7 +148,7 @@ void draw() {
   }
   
   pMousePressed = nMousePressed;
-  
+  // --- printing
   processPrinting();
 }
 
