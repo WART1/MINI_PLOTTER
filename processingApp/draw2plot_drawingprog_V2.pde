@@ -53,6 +53,7 @@ PImage printIcon;
 PImage trashIcon;  
 PImage undoIcon;
 PImage loadIcon;
+PImage saveIcon;
 PImage plusIcon;
 PImage moinsIcon;
 PImage showGridIcon;

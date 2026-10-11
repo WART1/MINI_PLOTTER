@@ -7,6 +7,7 @@ void loadIcons() {
   trashIcon = loadImage("icons/trash.png");
   undoIcon = loadImage("icons/undo.png");
   loadIcon = loadImage("icons/load.png");
+  saveIcon = loadImage("icons/save.png");
   plusIcon = loadImage("icons/plus.png");
   moinsIcon = loadImage("icons/moins.png");
   showGridIcon = loadImage("icons/showGrid.png");
@@ -86,6 +87,11 @@ void displayButtons(int menuY, int menuX, int buttonSize) {
   if(button(menuX, menuY+=120, buttonSize, buttonSize, printIcon, "Lance l'impression")) {
     if(lineIndex > 0){
       pressPlay();
+    }
+    } 
+    if(button(menuX + 150 , menuY+=120, buttonSize, buttonSize, saveIcon, "Save to file")) {
+    if(lineIndex > 0){
+      exportFile();
     } 
   }
   if(printStatus != 0){
