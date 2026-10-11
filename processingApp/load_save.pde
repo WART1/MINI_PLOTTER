@@ -22,9 +22,9 @@ void loadSelected(File selection) {
           lineIndex++;
         }
       }
-      isSaved = true; // eviter de resauvegarder lors de l'impression 
+      isSaved = true; // eviter de resauvegarder lors de l'impression
       reader.close();
-    } 
+    }
     catch (IOException e) {
       e.printStackTrace();
     }
@@ -54,18 +54,18 @@ void saveSelected(File selection) {
     for (int i=0; i<=lineIndex; i++) { // draw all lines // lineIndex est incrémenté à chaque new click de souris sur le canvas
       exportLineTo(cP[i], xP[i], yP[i], sP[i]); // write coordinate to the file
     }
-    output.flush();  
+    output.flush();
     output.close();
-    isSaved = true; 
+    isSaved = true;
     //startPrintingSequence(); // On lance l'impression juste après la sauvegarde
   }
-  
 }
-void exportLineTo(int command, float newX, float newY, float servo) {  
+void exportLineTo(int command, float newX, float newY, float servo) {
   newX=constrain(newX, 1, 255); // constrain(val, low, high)
   newY=constrain(newY, 1, 255);
   servo=constrain(servo, 1, 255);
-  command=constrain(command,1,255);
+  command=constrain(command, 1, 255);
   output.println(command+","+(nf(newX, 3, 0))+","+(nf(newY, 3, 0))+","+(nf(servo, 3, 0))); // Write the coordinate to the file
   // nf(num, left, right) sert à formater les nombres, combien de digits > 034, 001, 100
 }
+

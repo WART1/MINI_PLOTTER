@@ -15,13 +15,13 @@ void loadIcons() {
 }
 //Dessine un bouton rond avec une icône et un label. Elle retourne true si le bouton est pressé, sinon false.
 boolean button(int buttonX, int buttonY, int buttonW, int buttonH, PImage icon, String label) {
-  int padding = 10; 
+  int padding = 10;
   boolean pressed=false;
 
   boolean over=(mouseX>=buttonX && mouseY>=buttonY && mouseX<= buttonX+buttonW && mouseY<=buttonY+buttonH);
 
   if (over) {
-    fill(122,229,93);
+    fill(122, 229, 93);
     overLabel = label;
 
     if (nMousePressed && pMousePressed==false) {
@@ -29,7 +29,7 @@ boolean button(int buttonX, int buttonY, int buttonW, int buttonH, PImage icon, 
       fill(160);
     }
   } else {
-    fill(213,229,93);
+    fill(213, 229, 93);
   }
 
   noStroke();
@@ -44,27 +44,27 @@ boolean button(int buttonX, int buttonY, int buttonW, int buttonH, PImage icon, 
   return pressed;
 }
 // --- DISPLAY BUTTONS ---
-// Affiche un label à côté du curseur de la souris lorsqu'on passe sur le bouton 
+// Affiche un label à côté du curseur de la souris lorsqu'on passe sur le bouton
 void displayLabel(String label) {
   pushMatrix(); // Sauvegarde l'état du dessin
-  
+
   // Petit rectangle de fond pour la lisibilité
   fill(0, 150); // Noir transparent
   noStroke();
   float txtWidth = textWidth(label) + 20;
   rect(mouseX+50, mouseY, txtWidth, 40, 5); // Positionner près de ta zone de légende
-  
+
   // Le texte
   fill(255); // Blanc
   textSize(22);
   // textAlign(CENTER, CENTER);
-  text(label, mouseX+70, mouseY+25); 
-  
+  text(label, mouseX+70, mouseY+25);
+
   popMatrix(); // Restaure l'état
 }
 // Affiche les boutons sur l'interface
 void displayButtons(int menuY, int menuX, int buttonSize) {
-   if (button(menuX, menuY, buttonSize, buttonSize, loadIcon, "Charger un dessin")) {
+  if (button(menuX, menuY, buttonSize, buttonSize, loadIcon, "Charger un dessin")) {
     loadFile();
   }
   if (button(menuX, menuY+=120, buttonSize, buttonSize, !showGrid?showGridIcon:hideGridIcon, !showGrid?"Show":"Hide")) {
@@ -73,7 +73,7 @@ void displayButtons(int menuY, int menuX, int buttonSize) {
   if (button(menuX + buttonSize + 20, menuY+=10, buttonSize/3, buttonSize/3, plusIcon, "Plus")) {
     //grid++;
     grid=constrain(grid+2, 2, 10);
-  }  
+  }
   if (button(menuX + buttonSize + 20, menuY+=buttonSize/2, buttonSize/3, buttonSize/3, moinsIcon, "Moins")) {
     grid=constrain(grid-2, 2, 10);
   }
@@ -84,28 +84,28 @@ void displayButtons(int menuY, int menuX, int buttonSize) {
     lineIndex=0;
     isSaved = false;
   }
-  if(button(menuX, menuY+=120, buttonSize, buttonSize, printIcon, "Lance l'impression")) {
-    if(lineIndex > 0){
+  if (button(menuX, menuY+=120, buttonSize, buttonSize, printIcon, "Lance l'impression")) {
+    if (lineIndex > 0) {
       pressPlay();
     }
-    } 
-    if(button(menuX + 100 , menuY, buttonSize, buttonSize, saveIcon, "Save to file")) {
-    if(lineIndex > 0){
-      exportFile();
-    } 
   }
-  if(printStatus != 0){
-    if(button(menuX, menuY+=120, buttonSize, buttonSize, stopIcon, "Arrêter l'impression")) {
+  if (button(menuX + 100, menuY, buttonSize, buttonSize, saveIcon, "Save to file")) {
+    if (lineIndex > 0) {
+      exportFile();
+    }
+  }
+  if (printStatus != 0) {
+    if (button(menuX, menuY+=120, buttonSize, buttonSize, stopIcon, "Arrêter l'impression")) {
       pressStop();
     }
-    if(printStatus != 2){
-      if(button(menuX+150, menuY, buttonSize, buttonSize, pauseIcon, "Pause l'impression")){
+    if (printStatus != 2) {
+      if (button(menuX+150, menuY, buttonSize, buttonSize, pauseIcon, "Pause l'impression")) {
         pressPause();
       }
     }
   }
-  if(printStatus == 2){
-    if(button(menuX+250, menuY, buttonSize, buttonSize, playIcon, "Reprendre l'impression")){
+  if (printStatus == 2) {
+    if (button(menuX+250, menuY, buttonSize, buttonSize, playIcon, "Reprendre l'impression")) {
       pressPlay();
     }
   }
@@ -115,16 +115,16 @@ void displayLegends(int menuY, int menuX) {
   String arduinoStatus = "";
   textSize(28);
   textAlign(LEFT);
-  
-  fill(255,255,2);
+
+  fill(255, 255, 2);
   text("DRAW2PLOT (v2.1): ", menuX+=200, menuY+=20);
 
-  if(arduinoReady){
+  if (arduinoReady) {
     arduinoStatus = "Prêt";
-    fill(0,255,0);
+    fill(0, 255, 0);
   } else {
     arduinoStatus = "En attente...";
-    fill(255,0,0);
+    fill(255, 0, 0);
   }
 
   text("ARDUINO : " + arduinoStatus, menuX, menuY+=30);
@@ -134,10 +134,9 @@ void displayLegends(int menuY, int menuX) {
   //text("CAP SIZE: "+capSize, 1160, menuY+=30);
   text("X: "+mX+" cm", menuX, menuY+=30);
   text("Y: "+mY+" cm", menuX, menuY+=30);
-  if (fileSaved != ""){
+  if (fileSaved != "") {
     text("Fichier actuel : " + fileSaved, menuX-=200, 790);
   }
-  
 }
 // Affichage du menu complet (boutons + légendes)
 void renderMenu() {
