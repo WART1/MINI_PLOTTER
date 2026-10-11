@@ -22,7 +22,7 @@ void processPrinting() {
   // GESTION DU RETOUR AU HOME (État 3)
   if (printStatus == 3 && !waitingForAck) {
     println(".. back to home ..");
-    sendSingleMessage(byte(3), byte(1), byte(1), byte(1)); //x1, y1, pen up
+    sendSingleMessage(byte(3), byte(1), byte(1), byte(1));
     waitingForAck = true;
     printStatus = 4; // État d'attente du dernier ACK de l'Arduino
   }
@@ -83,7 +83,7 @@ void sendSingleMessage(byte command, byte xPos, byte yPos, byte pen) {
 // --- PRINTING BUTTONS
 void pressPlay() {
   // On ne lance la sauvegarde que si on n'est pas déjà en train d'imprimer
-  if (printStatus == 0) { 
+  if (printStatus == 0) {
     if (lineIndex < 0) {
       println("Rien à imprimer !");
       return;
@@ -94,7 +94,7 @@ void pressPlay() {
     } else {
       startPrintingSequence();
     }
-  } else if (printStatus == 2) { // bouton reprise après pause
+  } else if (printStatus == 2) {
     printStatus = 1;
     println("Reprise...");
   }
@@ -108,10 +108,16 @@ void pressPause() {
 void pressStop() {
   printStatus = 0;
   waitingForAck = false;
-  // lève le stylo et rentre à la maison
-  // On envoie l'ordre de lever le stylo (1) 
-  // on envoie la coordonnée x1, y1, ce qui correspond au home.
-  sendSingleMessage(byte(1), byte(1), byte(1), byte(1)); // pourquoi dans arduino, c'est quand il reçoit 4 en cmd qu'il fait un home, là on lui envoie 1
+
+  // On récupère la position du dernier point envoyé dans le buffer
+  if (printLineIndex >= 0) {
+    //byte lastX = byte(printXP[currentPrintingIndex]);
+    //byte lastY = byte(printYP[currentPrintingIndex]);
+
+    // On envoie l'ordre de lever le stylo (255) à cette même position
+    sendSingleMessage(byte(1), byte(1), byte(1), byte(1));
+  }
+
   println("Impression ANNULÉE.");
 }
 
