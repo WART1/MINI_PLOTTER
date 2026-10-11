@@ -1,9 +1,17 @@
+# TODO : COmprendre matplotlib et ecrire un code fonctionnel soi meme
+
 import matplotlib.pyplot as plt
+
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('file', help='Path to the input file')
+args = parser.parse_args()
 
 x_coords = []
 y_coords = []
 
-with open('coordonnees.txt', 'r') as f:
+with open(args.file, 'r') as f:
     for line in f:
         line = line.strip()
         if not line or line.startswith('#'):
@@ -21,13 +29,15 @@ with open('coordonnees.txt', 'r') as f:
 
 # Création du graphique et sauvegarde
 plt.figure(figsize=(8, 6))
-plt.plot(x_coords, y_coords, marker='o', linestyle='-', color='b')
-plt.title("Visualisation des coordonnées")
-plt.xlabel("Axe X")
-plt.ylabel("Axe Y")
-plt.grid(True)
+# plt.plot(x_coords, y_coords, marker='o', linestyle='-', color='b')
+plt.plot(x_coords, y_coords)
 
-plt.savefig('mon_image.png', dpi=300)
+#plt.title("Visualisation des coordonnées")
+#plt.xlabel("Axe X")
+#plt.ylabel("Axe Y")
+#plt.grid(True)
+
+#plt.savefig('mon_image.png', dpi=300)
 plt.savefig('mon_image.svg')
 
 print("Conversion réussie avec extraction des colonnes !")
