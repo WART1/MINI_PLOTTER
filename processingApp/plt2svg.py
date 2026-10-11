@@ -1,6 +1,5 @@
-# TODO : COmprendre matplotlib et ecrire un code fonctionnel soi meme
-
 import matplotlib.pyplot as plt
+
 
 import argparse
 
@@ -8,36 +7,55 @@ parser = argparse.ArgumentParser()
 parser.add_argument('file', help='Path to the input file')
 args = parser.parse_args()
 
-x_coords = []
-y_coords = []
+
+segments = []
+current_x = []
+current_y = []
 
 with open(args.file, 'r') as f:
-    for line in f:
+    for i, line in enumerate(f):
+        if i == 0:
+            continue  # Ignore l'en-tête
+            
         line = line.strip()
         if not line or line.startswith('#'):
             continue
             
-        # Supprime les guillemets s'il y en a au début/fin, puis sépare par la virgule
-        line = line.replace('"', '')
         parts = line.split(',')
-        
-        # On vérifie qu'on a bien au moins 3 colonnes (index 0, 1, 2)
-        if len(parts) >= 3:
-            # parts[1] correspond à '048' (x) et parts[2] à '014' (y)
-            x_coords.append(float(parts[1]))
-            y_coords.append(float(parts[2]))
+        if len(parts) >= 4:
+            x = float(parts[1])
+            y = float(parts[2])
+            pen_status = int(parts[3])  # 1 = Début de trait, 255 = Suite de trait
+            
+            # Si on rencontre un '1', c'est qu'on commence un nouveau segment
+            if pen_status == 1:
+                if current_x:
+                    segments.append((current_x, current_y))
+                    current_x, current_y = [], []
+            
+            # On ajoute le point au segment en cours
+            current_x.append(x)
+            current_y.append(y)
 
-# Création du graphique et sauvegarde
-plt.figure(figsize=(8, 6))
-# plt.plot(x_coords, y_coords, marker='o', linestyle='-', color='b')
-plt.plot(x_coords, y_coords)
+# Ajout du dernier segment
+if current_x:
+    segments.append((current_x, current_y))
 
-#plt.title("Visualisation des coordonnées")
-#plt.xlabel("Axe X")
-#plt.ylabel("Axe Y")
-#plt.grid(True)
+# Création de la figure
+fig, ax = plt.subplots(figsize=(8, 6))
 
-#plt.savefig('mon_image.png', dpi=300)
-plt.savefig('mon_image.svg')
+# Tracé de chaque segment de manière indépendante
+for seg_x, seg_y in segments:
+    ax.plot(seg_x, seg_y, color='blue', linewidth=6)
 
-print("Conversion réussie avec extraction des colonnes !")
+# Redressement de l'axe Y
+ax.set_ylim(ax.get_ylim()[::-1])
+
+# Suppression totale des cadres, axes et marges
+ax.axis('off')
+
+# Sauvegarde finale propre en SVG et PNG transparent
+plt.savefig('save_final.svg', bbox_inches='tight', pad_inches=0)
+plt.savefig('save_final.png', dpi=300, bbox_inches='tight', pad_inches=0, transparent=True)
+
+print("Conversion parfaite obtenue !")

@@ -1,3 +1,4 @@
+// Créer une typo avec l'outil, et utiliser cette typo pour le texte dans l'interface
 // --- LOAD ICONES IMAGES ---
 void loadIcons() {
   playIcon = loadImage("icons/play.png");
@@ -7,7 +8,7 @@ void loadIcons() {
   trashIcon = loadImage("icons/trash.png");
   undoIcon = loadImage("icons/undo.png");
   loadIcon = loadImage("icons/load.png");
-  saveIcon = loadImage("icons/save.png");
+  saveIcon = loadImage("icons/save_final.png");
   plusIcon = loadImage("icons/plus.png");
   moinsIcon = loadImage("icons/moins.png");
   showGridIcon = loadImage("icons/showGrid.png");
